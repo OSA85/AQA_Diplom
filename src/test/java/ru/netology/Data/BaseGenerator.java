@@ -44,7 +44,7 @@ public class BaseGenerator {
     }
 
 
-    private static String datasource = System.getProperty("datasource");
+    private static final String datasource = System.getProperty("datasource");
 
     @SneakyThrows
     public static void cleanDatabase() {
