@@ -13,10 +13,10 @@ import java.util.concurrent.TimeUnit;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.Data.BaseGenerator.*;
-import static ru.netology.Data.DataHelper.getApprovedCard;
-import static ru.netology.Data.DataHelper.getDeclinedCard;
+import static ru.netology.Data.DataHelper.*;
 
 public class FormBuyingTourTest {
+
     ChoosePage choosePage = new ChoosePage();
     PaymentPage paymentPage = new PaymentPage();
 
@@ -27,7 +27,6 @@ public class FormBuyingTourTest {
 
     @AfterAll
     static void tearDownAll() {
-
         SelenideLogger.removeListener("allure");
         cleanDatabase();
     }
@@ -142,6 +141,387 @@ public class FormBuyingTourTest {
     public void shouldEmptyFormWithCredit() {
         choosePage.buyWithCredit();
         paymentPage.emptyForm();
+    }
+
+    @Test
+    @DisplayName("Покупка картой без заполнения поля карты а остальные поля валидными данными")
+    public void shouldEmptyFieldCardWithoutCredit() {
+        choosePage.buyCard();
+        var info = getEmptyCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при заполнения поля карты одной цифрой а остальные поля валидными данными")
+    public void shouldOneNumberInFieldCardNumberWithoutCredit() {
+        choosePage.buyCard();
+        var info = getOneNumberCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при заполнения поля карты 15 цифрами а остальные поля валидными данными")
+    public void shouldFifteenNumberInFieldCardNumberWithoutCredit() {
+        choosePage.buyCard();
+        var info = getFifteenNumberCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка неизвестной картой при заполнения поля карты а остальные поля валидными данными")
+    public void shouldUnknownCardInFieldCardNumberWithoutCredit() {
+        choosePage.buyCard();
+        var info = getFakerNumberCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой без заполнения поля месяц а остальные поля валидными данными")
+    public void shouldEmptyFieldMonthWithoutCredit() {
+        choosePage.buyCard();
+        var info = getEmptyMonth();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой c заполнением поля месяц одной цифрой а остальные поля валидными данными")
+    public void shouldOneNumberInFieldMonthWithoutCredit() {
+        choosePage.buyCard();
+        var info = getOneNumberMonth();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой в поле месяц предыдущий от текущего а остальные поля валидными данными")
+    public void shouldFieldWithPreviousMonthWithoutCredit() {
+        choosePage.buyCard();
+        var info = getPreviousMonthInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой в поле месяц в верном формате вести нулевой (не существующий) месяц" +
+            " а остальные поля валидными данными")
+    public void shouldFieldWithZeroMonthWithoutCredit() {
+        choosePage.buyCard();
+        var info = getZeroMonthInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой в поле месяц в верном формате вести тринадцатый (не существующий) месяц" +
+            " а остальные поля валидными данными")
+    public void shouldFieldWithThirteenMonthWithoutCredit() {
+        choosePage.buyCard();
+        var info = getThirteenMonthInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой без заполнения поля год а остальные поля валидными данными")
+    public void shouldEmptyFieldYearWithoutCredit() {
+        choosePage.buyCard();
+        var info = getEmptyYear();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldYearError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой заполнение поля год, предыдущим годом от текущего" +
+            " а остальные поля валидными данными")
+    public void shouldPreviousYearFieldYearWithoutCredit() {
+        choosePage.buyCard();
+        var info = getPreviousYearInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldYearError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой заполнение поля год, на шесть лет больше чем текущий" +
+            " а остальные поля валидными данными")
+    public void shouldPlusSixYearFieldYearWithoutCredit() {
+        choosePage.buyCard();
+        var info = getPlusSixYearInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldYearError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при пустом поле владелец а остальные поля валидными данными")
+    public void shouldEmptyFieldNameWithoutCredit() {
+        choosePage.buyCard();
+        var info = getApprovedCard();
+        paymentPage.sendingEmptyNameValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при заполнении поля владелец пробелом а остальные поля валидными данными")
+    public void shouldSpaceFieldNameWithoutCredit() {
+        choosePage.buyCard();
+        var info = getSpaceName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при заполнении поля владелец спец. символами" +
+            " а остальные поля валидными данными")
+    public void shouldSpecialSymbolInFieldNameWithoutCredit() {
+        choosePage.buyCard();
+        var info = getSpecialSymbolInFieldName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при заполнении поля владелец цифрами" +
+            " а остальные поля валидными данными")
+    public void shouldNumberInFieldNameWithoutCredit() {
+        choosePage.buyCard();
+        var info = getNumberInFieldName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой при заполнении поля владелец латинским алфавитом" +
+            " а остальные поля валидными данными")
+    public void shouldEnglishNameInFieldNameWithoutCredit() {
+        choosePage.buyCard();
+        var info = getEnglishNameInFieldName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой поле CVV пустое" +
+            " а остальные поля валидными данными")
+    public void shouldEmptyCVVInFieldCVVWithoutCredit() {
+        choosePage.buyCard();
+        var info = getEmptyCVVInFieldCVV();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCVVError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой поле CVV одним числом" +
+            " а остальные поля валидными данными")
+    public void shouldOneNumberInFieldCVVWithoutCredit() {
+        choosePage.buyCard();
+        var info = getOneNumberInFieldCVV();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCVVError();
+    }
+
+    @Test
+    @DisplayName("Покупка картой поле CVV двумя числами" +
+            " а остальные поля валидными данными")
+    public void shouldTwoNumberInFieldCVVWithoutCredit() {
+        choosePage.buyCard();
+        var info = getOTwoNumberInFieldCVV();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCVVError();
+    }
+
+
+    @Test
+    @DisplayName("Покупка в кредит без заполнения поля карты а остальные поля валидными данными")
+    public void shouldEmptyFieldCardWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getEmptyCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит при заполнения поля карты одной цифрой а остальные поля валидными данными")
+    public void shouldOneNumberInFieldCardNumberWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getOneNumberCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит при заполнения поля карты 15 цифрами а остальные поля валидными данными")
+    public void shouldFifteenNumberInFieldCardNumberWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getFifteenNumberCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит неизвестной картой при заполнения поля карты а остальные поля валидными данными")
+    public void shouldUnknownCardInFieldCardNumberWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getFakerNumberCardNumber();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCardNumberError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит без заполнения поля месяц а остальные поля валидными данными")
+    public void shouldEmptyFieldMonthWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getEmptyMonth();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит c заполнением поля месяц одной цифрой а остальные поля валидными данными")
+    public void shouldOneNumberInFieldMonthWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getOneNumberMonth();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит в поле месяц предыдущий от текущего а остальные поля валидными данными")
+    public void shouldFieldWithPreviousMonthWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getPreviousMonthInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит в поле месяц в верном формате вести нулевой (не существующий) месяц" +
+            " а остальные поля валидными данными")
+    public void shouldFieldWithZeroMonthWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getZeroMonthInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит в поле месяц в верном формате вести тринадцатый (не существующий) месяц" +
+            " а остальные поля валидными данными")
+    public void shouldFieldWithThirteenMonthWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getThirteenMonthInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldMonthError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит без заполнения поля год а остальные поля валидными данными")
+    public void shouldEmptyFieldYearWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getEmptyYear();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldYearError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, заполнение поля год, предыдущим годом от текущего" +
+            " а остальные поля валидными данными")
+    public void shouldPreviousYearFieldYearWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getPreviousYearInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldYearError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, заполнение поля год, на шесть лет больше чем текущий" +
+            " а остальные поля валидными данными")
+    public void shouldPlusSixYearFieldYearWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getPlusSixYearInField();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldYearError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, при пустом поле владелец а остальные поля валидными данными")
+    public void shouldEmptyFieldNameWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getApprovedCard();
+        paymentPage.sendingEmptyNameValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, при заполнении поля владелец пробелом а остальные поля валидными данными")
+    public void shouldSpaceFieldNameWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getSpaceName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, при заполнении поля владелец спец. символами" +
+            " а остальные поля валидными данными")
+    public void shouldSpecialSymbolInFieldNameWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getSpecialSymbolInFieldName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, при заполнении поля владелец цифрами" +
+            " а остальные поля валидными данными")
+    public void shouldNumberInFieldNameWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getNumberInFieldName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, при заполнении поля владелец латинским алфавитом" +
+            " а остальные поля валидными данными")
+    public void shouldEnglishNameInFieldNameWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getEnglishNameInFieldName();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldNameError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, поле CVV пустое" +
+            " а остальные поля валидными данными")
+    public void shouldEmptyCVVInFieldCVVWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getEmptyCVVInFieldCVV();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCVVError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, поле CVV одним числом" +
+            " а остальные поля валидными данными")
+    public void shouldOneNumberInFieldCVVWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getOneNumberInFieldCVV();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCVVError();
+    }
+
+    @Test
+    @DisplayName("Покупка в кредит, поле CVV двумя числами" +
+            " а остальные поля валидными данными")
+    public void shouldTwoNumberInFieldCVVWithCredit() {
+        choosePage.buyWithCredit();
+        var info = getOTwoNumberInFieldCVV();
+        paymentPage.sendingValidData(info);
+        paymentPage.sendingValidDataWithFieldCVVError();
     }
 
 

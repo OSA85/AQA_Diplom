@@ -74,4 +74,60 @@ public class PaymentPage {
         buttonContinue.click();
     }
 
+    public void sendingValidDataWithFieldCardNumberError () {
+        fieldCardNumberError.shouldBe(Condition.visible);
+        fieldMonthError.shouldBe(Condition.hidden);
+        fieldYearError.shouldBe(Condition.hidden);
+        fieldNameError.shouldBe(Condition.hidden);
+        fieldCvvError.shouldBe(Condition.hidden);
+    }
+
+    public void sendingValidDataWithFakerCardNumber () {
+        notificationError.shouldBe(Condition.visible);
+        fieldMonthError.shouldBe(Condition.hidden);
+        fieldYearError.shouldBe(Condition.hidden);
+        fieldNameError.shouldBe(Condition.hidden);
+        fieldCvvError.shouldBe(Condition.hidden);
+    }
+
+    public void sendingValidDataWithFieldMonthError () {
+        fieldCardNumberError.shouldBe(Condition.hidden);
+        fieldMonthError.shouldBe(Condition.visible);
+        fieldYearError.shouldBe(Condition.hidden);
+        fieldNameError.shouldBe(Condition.hidden);
+        fieldCvvError.shouldBe(Condition.hidden);
+    }
+
+    public void sendingValidDataWithFieldYearError () {
+        fieldCardNumberError.shouldBe(Condition.hidden);
+        fieldMonthError.shouldBe(Condition.hidden);
+        fieldYearError.shouldBe(Condition.visible);
+        fieldNameError.shouldBe(Condition.hidden);
+        fieldCvvError.shouldBe(Condition.hidden);
+    }
+
+    public void sendingEmptyNameValidData (DataHelper.CardInfo info) {
+        fieldCardNumber.setValue(info.getCardNumber());
+        fieldMonth.setValue(info.getMonth());
+        fieldYear.setValue(info.getYear());
+        fieldCvv.setValue(info.getCvv());
+        buttonContinue.click();
+    }
+
+    public void sendingValidDataWithFieldNameError () {
+        fieldCardNumberError.shouldBe(Condition.hidden);
+        fieldMonthError.shouldBe(Condition.hidden);
+        fieldYearError.shouldBe(Condition.hidden);
+        fieldNameError.shouldBe(Condition.visible);
+        fieldCvvError.shouldBe(Condition.hidden);
+    }
+
+    public void sendingValidDataWithFieldCVVError () {
+        fieldCardNumberError.shouldBe(Condition.hidden);
+        fieldMonthError.shouldBe(Condition.hidden);
+        fieldYearError.shouldBe(Condition.hidden);
+        fieldNameError.shouldBe(Condition.hidden);
+        fieldCvvError.shouldBe(Condition.visible);
+    }
+
 }

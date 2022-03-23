@@ -33,7 +33,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'com.codeborne:selenide:6.3.0'
     testImplementation 'io.qameta.allure:allure-selenide:2.17.2'
-    testImplementation 'mysql:mysql-connector-java:8.0.28'
+//    testImplementation 'mysql:mysql-connector-java:8.0.28'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'
     testImplementation 'org.postgresql:postgresql:42.3.3'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
@@ -41,10 +42,11 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperty 'selenide.headless', getProperty('headless')
+     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 //    для выбора базы раскомментировать нужную строку
 //    для базы mysql, закомментировать строку для postgres, и снять комментарий со строки ниже
-    systemProperty 'datasource', getProperty('datasource', 'jdbc:mysql://localhost:3306/mysql')
+    systemProperty 'datasource', getProperty ('datasource', 'jdbc:mysql://localhost:3306/mysql')
 //    для базы postgres, закомментировать строку для mysql и снять комментарий со строки ниже
 //    systemProperty 'datasource', System.getProperty('datasource', 'jdbc:postgres://localhost:3306/postgres')
 }
+
