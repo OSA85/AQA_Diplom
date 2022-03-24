@@ -83,11 +83,11 @@ public class PaymentPage {
     }
 
     public void sendingValidDataWithFakerCardNumber () {
-        notificationError.shouldBe(Condition.visible);
         fieldMonthError.shouldBe(Condition.hidden);
         fieldYearError.shouldBe(Condition.hidden);
         fieldNameError.shouldBe(Condition.hidden);
         fieldCvvError.shouldBe(Condition.hidden);
+        notificationError.shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
 
     public void sendingValidDataWithFieldMonthError () {

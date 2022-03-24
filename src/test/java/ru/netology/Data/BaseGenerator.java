@@ -1,7 +1,5 @@
 package ru.netology.Data;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -10,39 +8,6 @@ import java.sql.DriverManager;
 
 
 public class BaseGenerator {
-
-    public BaseGenerator() {
-    }
-
-    @Data
-    @RequiredArgsConstructor
-    public class PaymentEntityInfo {
-        private String id;
-        private String amount;
-        private String created;
-        private String status;
-        private String transaction_id;
-    }
-
-    @Data
-    @RequiredArgsConstructor
-    public class OrderEntityInfo {
-        private String id;
-        private String created;
-        private String credit_id;
-        private String payment_id;
-    }
-
-    @Data
-    @RequiredArgsConstructor
-    public class CreditRequestEntityInfo {
-        private String id;
-        private String bank_id;
-        private String created;
-        private String status;
-
-    }
-
 
     private static final String datasource = System.getProperty("datasource");
 

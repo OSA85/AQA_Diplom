@@ -7,9 +7,7 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import ru.netology.Page.ChoosePage;
 import ru.netology.Page.PaymentPage;
-
 import java.util.concurrent.TimeUnit;
-
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.Data.BaseGenerator.*;
@@ -46,6 +44,8 @@ public class FormBuyingTourTest {
 //        заполнение полей валидными данными
         var info = getApprovedCard();
         paymentPage.sendingValidData(info);
+//        получить ответ на сайте что операция прошла
+        paymentPage.approvedBank();
 //        время на запись в базу данных
         TimeUnit.SECONDS.sleep(10);
 //        получить ответ что запись в базе прошла
@@ -56,8 +56,7 @@ public class FormBuyingTourTest {
         assertEquals(expected, paymentInfo.getStatus());
 //        проверка соответствия в базе данных id в таблице покупок и в таблице заявок:
         assertEquals(paymentInfo.getTransaction_id(), orderInfo.getPayment_id());
-//        получить ответ на сайте что операция прошла
-        paymentPage.approvedBank();
+
     }
 
 
@@ -70,6 +69,8 @@ public class FormBuyingTourTest {
 //        заполнение полей валидными данными
         var info = getApprovedCard();
         paymentPage.sendingValidData(info);
+//        получить ответ на сайте что операция прошла
+        paymentPage.approvedBank();
 //        время на запись в базу данных
         TimeUnit.SECONDS.sleep(10);
 //        вводим переменные для провеки
@@ -80,8 +81,7 @@ public class FormBuyingTourTest {
         assertEquals(expected, creditRequestInfo.getStatus());
 //        Проверка соответствия в базе данных id в таблице запросов кредита и в таблице заявок:
         assertEquals(creditRequestInfo.getBank_id(), orderInfo.getCredit_id());
-//        получить ответ на сайте что операция прошла
-        paymentPage.approvedBank();
+
 
     }
 
@@ -93,17 +93,7 @@ public class FormBuyingTourTest {
 //        заполнение поля номера карты не валидным номером карты, остальных полей валидными данными
         var info = getDeclinedCard();
         paymentPage.sendingNotValidData(info);
-//        время на запись в базу данных
-        TimeUnit.SECONDS.sleep(10);
-//        вводим переменные для провеки
-        var expected = "DECLINED";
-        var paymentInfo = getPaymentInfo();
-        var orderInfo = getOrderInfo();
-//        проверка статуса карты ожидаемого и в базе
-        assertEquals(expected, paymentInfo.getStatus());
-//        проверка соответствия в базе данных id в таблице запросов кредита и в таблице заявок:
-        assertEquals(paymentInfo.getTransaction_id(), orderInfo.getPayment_id());
-//        получить ответ на сайте что операция прошла
+//        получить ответ на сайте что операция не прошла
         paymentPage.rejectionBank();
     }
 
@@ -115,17 +105,7 @@ public class FormBuyingTourTest {
 //        заполнение поля номера карты не валидным номером карты, остальных полей валидными данными
         var info = getDeclinedCard();
         paymentPage.sendingNotValidData(info);
-//        время на запись в базу данных
-        TimeUnit.SECONDS.sleep(10);
-//        вводим переменные для провеки
-        var expected = "DECLINED";
-        var creditRequestInfo = getCreditRequestInfo();
-        var orderInfo = getOrderInfo();
-//        проверка статуса карты ожидаемого и в базе
-        assertEquals(expected, creditRequestInfo.getStatus());
-//        Проверка соответствия в базе данных id в таблице запросов кредита и в таблице заявок:
-        assertEquals(creditRequestInfo.getBank_id(), orderInfo.getCredit_id());
-//        получить ответ на сайте что операция прошла
+//        получить ответ на сайте что операция не прошла
         paymentPage.rejectionBank();
     }
 
@@ -176,7 +156,7 @@ public class FormBuyingTourTest {
         choosePage.buyCard();
         var info = getFakerNumberCardNumber();
         paymentPage.sendingValidData(info);
-        paymentPage.sendingValidDataWithFieldCardNumberError();
+        paymentPage.sendingValidDataWithFakerCardNumber();
     }
 
     @Test
@@ -367,7 +347,7 @@ public class FormBuyingTourTest {
         choosePage.buyWithCredit();
         var info = getFakerNumberCardNumber();
         paymentPage.sendingValidData(info);
-        paymentPage.sendingValidDataWithFieldCardNumberError();
+        paymentPage.sendingValidDataWithFakerCardNumber();
     }
 
     @Test

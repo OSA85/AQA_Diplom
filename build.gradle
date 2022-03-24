@@ -14,7 +14,7 @@ compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
 allure {
-    version = '2.17.2'
+       version = '2.17.2'
     useJUnit5 {
         version = '2.17.2'
     }
@@ -25,6 +25,8 @@ repositories {
     mavenCentral()
 }
 
+
+
 dependencies {
     implementation 'org.projectlombok:lombok:1.18.20'
     implementation 'org.jetbrains:annotations:20.1.0'
@@ -33,7 +35,6 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'com.codeborne:selenide:6.3.0'
     testImplementation 'io.qameta.allure:allure-selenide:2.17.2'
-//    testImplementation 'mysql:mysql-connector-java:8.0.28'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'
     testImplementation 'org.postgresql:postgresql:42.3.3'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
@@ -47,7 +48,7 @@ test {
 //    для базы mysql, закомментировать строку для postgres, и снять комментарий со строки ниже
     systemProperty 'datasource', getProperty ('datasource', 'jdbc:mysql://localhost:3306/mysql')
 //    для базы postgres, закомментировать строку для mysql и снять комментарий со строки ниже
-//    systemProperty 'datasource', System.getProperty('datasource', 'jdbc:postgres://localhost:3306/postgres')
+//    systemProperty 'datasource', System.getProperty('datasource', 'jdbc:postgresql://localhost:5432/postgres')
 }
 
 
