@@ -41,6 +41,9 @@ public class DataHelper {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
     }
 
+    private static String getValidYearPlusOne() {
+        return LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("yy"));
+    }
     private static String getPreviousYear() {
         return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy"));
     }
@@ -118,7 +121,7 @@ public class DataHelper {
     }
 
     public static CardInfo getZeroMonthInField() {
-        return new CardInfo(approvedCard, getZeroMonth(), getValidYear(), getName(), getCVV());
+        return new CardInfo(approvedCard, getZeroMonth(), getValidYearPlusOne(), getName(), getCVV());
     }
 
     public static CardInfo getThirteenMonthInField() {
