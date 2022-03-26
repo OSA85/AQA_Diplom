@@ -8,20 +8,20 @@
 
 ## Количество тест-кейсов и % успешных/не успешных
 
-Из общего количества авто-тестов в 46 шт.(100%), прошли успешно 35 шт.(76,08%) а не успешных 11 шт.(23,92%), что отражают отчеты:
+Из общего количества авто-тестов в 46 шт.(100%), прошли успешно 33 шт.(71,73%) а не успешных 13 шт.(28,26%), что отражают отчеты:
 <details>
   <summary>Allure</summary>
 
-  ![Отчет Allure Report](https://user-images.githubusercontent.com/91024430/159958275-4888647a-734b-4583-9b53-f655f6e7e258.jpg)
+  ![Отчет Allure Report](https://user-images.githubusercontent.com/91024430/160228122-1ad7c3dd-e6ce-4ccc-8cf8-2732ec860fc1.jpg)
 
-  ![Тесты которые прошли и не прошли в отчете Allure Report](https://user-images.githubusercontent.com/91024430/159958445-96326ed6-8f9f-4fd6-8577-37275490d89d.jpg)
+![Тесты которые прошли и не прошли в отчете Allure Report](https://user-images.githubusercontent.com/91024430/160228130-6e988835-3417-4fc3-9dea-92c223430113.jpg)
 
 </details>
 
 <details>
   <summary>встроенный отчет IntelliJ IDEA</summary>
   
-![Отчет IDEA](https://user-images.githubusercontent.com/91024430/159959472-d0329bb9-b052-404d-883a-1fc66f62eb01.jpg)
+![Отчет IDEA](https://user-images.githubusercontent.com/91024430/160228157-fa310e1a-2ca3-411d-9cb3-7820769daef5.jpg)
   
 </details>
 
