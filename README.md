@@ -21,7 +21,7 @@
 ## Запускаем SUT и теты для каждой базы отдельно:
 ### Для работы с базой данных MySQL
 Проект преднастроен под работу с базой данных MySQL.
-#### Способ запуска №1
+#### Запуск
 1. Открыть склонированный проект в Intellij IDEA.
 2. Вводим в терминале IDEA команду `docker-compose up -d`, для запуска контейнеров, дожидаемся запуска контейнеров.
 3. Проверить запуск контейнеров командой `docker ps` в терминале IDEA:
@@ -29,12 +29,6 @@
 4. Вводим в терминале IDEA команду `java -jar .\artifacts\aqa-shop.jar` для запуска приложения.
 5. Для запуска авто-тестов в Terminal Intellij IDEA открыть новую сессию и ввести команду: `./gradlew clean test allureReport -Dheadless=true`
 7. Для просмотра отчета Allure в терминале ввести команду: `./gradlew allureServe`.
-
-#### Способ запуска №2
-1. Открыть склонированный проект в Intellij IDEA.
-2. Вводим в терминале IDEA команду `docker-compose up -d`, для запуска контейнеров, дожидаемся запуска контейнеров.
-3. Вводим в терминале IDEA команду `./gradlew clean test allureReport -Dheadless=true java -Dspring.datasource.url=jdbc:mysql://localhost:3306/mysql -jar .\artifacts\aqa-shop.jar`, для запуска БД MySQL и запуска приложения.
-4. Для просмотра отчета Allure в терминале ввести команду: `./gradlew allureServe`.
 
 ### Для работы с базой данных PostgreSQL
 В находящемся в проекте файле `application.properties` закомментировать строку ниже "#для MySQL" и снять комментарий на строке ниже "#для PostgreSQL", выглядеть будет так:
@@ -47,7 +41,7 @@
   spring.datasource.password=pass
 ```
   
-#### Способ запуска №1
+#### Запуск
 1. Открыть склонированный проект в Intellij IDEA.
 2. Вводим в терминале IDEA команду `docker-compose up -d`, для запуска контейнеров, дожидаемся запуска контейнеров.
 3. Проверить запуск контейнеров командой `docker ps` в терминале IDEA:
@@ -55,13 +49,6 @@
 4. Вводим в терминале IDEA команду `java -jar .\artifacts\aqa-shop.jar` для запуска приложения.
 5. Для запуска авто-тестов в Terminal Intellij IDEA открыть новую сессию и ввести команду: `./gradlew clean test allureReport -Dheadless=true`
 7. Для просмотра отчета Allure в терминале ввести команду: `./gradlew allureServe`.
-
-#### Способ запуска №2
-1. Открыть склонированный проект в Intellij IDEA.
-2. Вводим в терминале IDEA команду `docker-compose up -d`, для запуска контейнеров, дожидаемся запуска контейнеров.
-3. Вводим в терминале IDEA команду `./gradlew clean test allureReport -Dheadless=true java -Dspring.datasource.url=jdbc:postgres://localhost:3306/postgres -jar .\artifacts\aqa-shop.jar`, для запуска БД PostgreSQL и запуска приложения.
-4. Для просмотра отчета Allure в терминале ввести команду: `./gradlew allureServe`.
-
 
 ### Приложение можно открыть на [странице](http://localhost:8080).
 
