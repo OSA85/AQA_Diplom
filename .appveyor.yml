@@ -21,5 +21,5 @@ install:
 
 build_script:
   - sleep 20
-  - ./gradlew test -Dselenide.headless=true -Durlbd=jdbc:mysql://localhost:3306/mysql --info
+  - ./gradlew test -Dselenide.headless=true --info
 #  - -Durlbd=jdbc:mysql://localhost:3306/mysql
