@@ -21,7 +21,5 @@ install:
 
 build_script:
   - sleep 20
-  - ./gradlew clean test allureReport -Dheadless=true --info
-  - ./gradlew allureServe
-#  - ./gradlew test -Dselenide.headless=true --info
+  - ./gradlew test -Dselenide.headless=true --info
 #  - -Durlbd=jdbc:mysql://localhost:3306/mysql
