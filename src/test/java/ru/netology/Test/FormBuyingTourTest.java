@@ -31,7 +31,7 @@ public class FormBuyingTourTest {
 
     @BeforeEach
     void openPage() {
-        Configuration.holdBrowserOpen = true;
+//        Configuration.holdBrowserOpen = true;  // для открытия окна браузера
         open("http://localhost:8080");
     }
 
